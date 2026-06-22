@@ -147,3 +147,163 @@ Store translated category name within dim_product.
 
 * Rationale:
 Translation table acts as reference data and does not justify a standalone dimension.
+
+---
+
+# Candidate Fact Tables
+
+## fct_order_line
+
+Business Process:
+Customer purchases product(s) through the marketplace.
+
+Grain:
+One row per order item.
+
+Source Tables:
+
+* olist_order_items_dataset
+
+Measures:
+
+* price
+* freight_value
+
+Dimensions:
+
+* dim_customer
+* dim_product
+* dim_seller
+* dim_date
+
+Purpose:
+Primary commercial fact supporting revenue, order volume, product performance, seller performance, and customer analytics.
+
+---
+
+## fct_payment
+
+Business Process:
+Customer payment transactions.
+
+Grain:
+One row per payment transaction.
+
+Source Tables:
+
+* olist_order_payments_dataset
+
+Measures:
+
+* payment_value
+
+Dimensions:
+
+* dim_customer
+* dim_date
+
+Purpose:
+Supports payment analysis, payment method analysis, and payment value reporting.
+
+Open Questions:
+
+* Validate relationship between orders and payments.
+* Confirm whether multiple payment transactions can exist for a single order.
+
+---
+
+## fct_delivery_performance
+
+Business Process:
+Order fulfillment and delivery lifecycle.
+
+Grain:
+One row per order.
+
+Source Tables:
+
+* olist_orders_dataset
+
+Derived Measures:
+
+* approval_time
+* shipping_time
+* delivery_time
+* delivery_delay
+
+Dimensions:
+
+* dim_customer
+* dim_geography
+* dim_date
+
+Purpose:
+Supports logistics and fulfillment analysis, including delivery performance and on-time delivery metrics.
+
+Open Questions:
+
+* Validate calculation logic for approval, shipping, and delivery durations.
+* Determine whether additional seller-level delivery analysis is required.
+
+---
+
+## fct_review
+
+Business Process:
+Customer feedback and satisfaction.
+
+Grain:
+One row per review.
+
+Source Tables:
+
+* olist_order_reviews_dataset
+
+Measures:
+
+* review_score
+
+Dimensions:
+
+* dim_customer
+* dim_product
+* dim_seller
+* dim_date
+
+Purpose:
+Supports customer satisfaction analysis, review trends, seller ratings, and product ratings.
+
+Open Questions:
+
+* Validate review-to-order relationship.
+* Confirm whether multiple reviews can exist for a single order.
+
+---
+
+# Preliminary Star Schema
+
+Core Dimensions:
+
+* dim_customer
+* dim_seller
+* dim_product
+* dim_geography
+* dim_date
+
+Core Facts:
+
+* fct_order_line
+* fct_payment
+* fct_delivery_performance
+* fct_review
+
+Modeling Philosophy:
+
+The dimensional model is organized around key marketplace business processes:
+
+* Purchasing
+* Payment
+* Fulfillment
+* Customer Satisfaction
+
+The model follows a business-process-driven approach where fact tables represent measurable business events and dimensions provide descriptive context for analysis.
