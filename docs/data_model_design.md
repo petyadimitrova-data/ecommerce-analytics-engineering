@@ -1,3 +1,20 @@
+# Data Model Design
+
+## Question Answered:
+
+What dimensional model best supports the business processes and analytical requirements of the e-commerce platform?
+
+## Purpose
+
+Define the analytical data model that supports the business requirements and metric definitions.
+
+## Key Decisions
+
+- Fact table grain
+- Dimension design
+- Business process coverage
+- Fact-to-dimension relationships
+
 # Candidate Dimensions
 
 ## dim_customer

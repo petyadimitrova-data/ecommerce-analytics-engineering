@@ -1,10 +1,10 @@
 # Business Requirements
 
-## Objective
+## Question Answered:
+What business problems are we trying to solve?
 
-Build an end-to-end Analytics Engineering solution for a multi-vendor e-commerce marketplace using Snowflake, dbt, SQL, and GitHub.
-
-The solution should provide trusted, well-documented data models and business metrics that support commercial performance analysis, customer analytics, logistics monitoring, and customer satisfaction reporting.
+## Purpose:
+Define the analytical requirements and business objectives.
 
 ---
 

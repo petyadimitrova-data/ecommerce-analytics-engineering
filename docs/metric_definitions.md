@@ -1,10 +1,10 @@
 # Metric Definitions
 
-## Purpose
+### Question Answered:
+How is business success measured?
 
-This document defines the business metrics that will be implemented within the Analytics Engineering solution.
-
-The goal is to establish consistent business definitions before technical implementation in Snowflake and dbt.
+### Purpose:
+Define KPIs and metric calculations.
 
 ---
 

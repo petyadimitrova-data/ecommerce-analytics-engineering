@@ -1,10 +1,16 @@
 # Project Scope
 
+Question Answered:
+What is included in the project?
+
+Purpose:
+Define project boundaries and deliverables.
+
 ## Objective
 
 Build a portfolio-quality Analytics Engineering project demonstrating:
 
-* Snowflake
+* DuckDB
 * dbt
 * SQL
 * Git/GitHub
@@ -25,14 +31,8 @@ using a realistic e-commerce dataset.
 * Customers
 * Products
 * Sellers
-
-### Data Platform
-
-* Snowflake
-
-### Transformation Framework
-
-* dbt
+* Reviews
+* Geolocations
 
 ### Modeling
 
@@ -50,12 +50,10 @@ using a realistic e-commerce dataset.
 
 ### Metrics
 
-* Revenue
-* Orders
-* Average Order Value
-* Active Customers
-* Revenue by Product Category
-* Revenue by Seller
+* Commercial Performance
+* Customer Analytics
+* Logistics & Fulfillment
+* Customer Satisfaction
 
 ### Documentation
 
@@ -63,15 +61,6 @@ using a realistic e-commerce dataset.
 * Metric Definitions
 * Architecture
 * Data Model
-
-## Out of Scope (Phase 1)
-
-* Machine Learning
-* Forecasting
-* Real-time Processing
-* Streaming Data
-* Complex Customer Segmentation
-* External APIs
 
 ## Success Criteria
 
@@ -83,3 +72,4 @@ A hiring manager should be able to review the repository and understand:
 4. The testing strategy.
 5. The metric definitions.
 6. The final reporting outputs.
+7. The reasoning behind major design decisions.
