@@ -1,7 +1,188 @@
-Why we switched from Snowflake to DuckDB
+# Lessons Learned
 
-What I learned about GitHub
+## Purpose
 
-What I learned about dbt project structure
+Capture key learnings, observations, challenges, and retrospective insights throughout the implementation of the Analytics Engineering Portfolio project.
 
-What I would do differently next time
+## Question This Document Answers
+
+* What was learned during each implementation phase?
+* What implementation decisions proved valuable?
+* What would be done differently in a future project?
+
+## Audience
+
+* Project Author
+* Hiring Managers
+* Analytics Engineers
+* Future Project Maintainers
+
+## Related Documents
+
+* implementation_plan.md
+* architecture.md
+* deployment_strategy.md
+
+---
+
+# Phase 1 - Data Ingestion
+
+## What I Learned
+
+### Why we switched from Snowflake to DuckDB
+
+The original implementation plan assumed Snowflake would be used as the analytical warehouse.
+
+After the Snowflake trial environment required payment method verification, the project was re-evaluated from a portfolio perspective.
+
+This led to an important realization:
+
+The primary objective of the project is to demonstrate Analytics Engineering capabilities rather than proficiency with a specific warehouse technology.
+
+DuckDB was selected because it provides:
+
+* Local execution
+* No infrastructure costs
+* Fast analytical performance
+* Native SQL support
+* Excellent dbt integration
+
+The switch allowed the project to remain focused on Analytics Engineering concepts rather than cloud platform administration.
+
+### What I Learned About GitHub
+
+Prior experience involved working with dbt projects stored in Azure DevOps repositories.
+
+This project provided hands-on experience with:
+
+* Creating personal repositories
+* Cloning repositories locally
+* Creating feature branches
+* Managing commits
+* Pushing changes to GitHub
+* Repository organization for public portfolio projects
+
+A key takeaway was understanding the relationship between:
+
+```text
+Local Repository
+    ↓
+Commit
+    ↓
+Push
+    ↓
+GitHub Repository
+```
+
+### What I Would Do Differently Next Time
+
+1. Establish repository structure before loading data.
+2. Define documentation standards at project initiation.
+3. Create implementation checkpoints from the beginning.
+4. Configure Git and GitHub workflow before starting technical work.
+
+---
+
+# Phase 2 - dbt Project Initialization
+
+## What I Learned
+
+### What I Learned About Local Analytics Engineering Environments
+
+Most of my previous experience was with managed platforms such as Snowflake and dbt Cloud where the underlying infrastructure is largely abstracted away.
+
+This implementation highlighted the components required to build a local Analytics Engineering environment from scratch:
+
+* Local database engine (DuckDB)
+* Database client (DBeaver)
+* Python runtime
+* Python virtual environments
+* dbt Core
+* Warehouse connection configuration
+* Git-integrated development workflow
+
+The experience helped me better understand how the various components interact behind the scenes in a dbt Core project.
+
+### What I Learned About DuckDB
+
+DuckDB proved to be a practical warehouse choice for portfolio development because it provides:
+
+* Simple local installation
+* Fast analytical query performance
+* Native SQL support
+* Easy integration with dbt
+* Portable database files
+
+Using DuckDB allowed me to focus on Analytics Engineering concepts without relying on cloud infrastructure or incurring platform costs.
+
+### What I Learned About dbt Core vs dbt Cloud
+
+My previous hands-on experience was primarily with dbt Cloud.
+
+Working with dbt Core exposed several components that are normally hidden by the Cloud platform:
+
+* Python environment management
+* Adapter installation
+* Profile configuration
+* Project initialization
+* Warehouse connectivity
+* Local execution environment
+
+The experience improved my understanding of the underlying architecture that supports dbt Cloud projects.
+
+### What I Learned About Python Virtual Environments
+
+Project-specific virtual environments provide a reproducible and isolated development setup.
+
+Benefits observed during implementation:
+
+* Dependency isolation
+* Consistent package versions
+* Reduced risk of conflicts between projects
+* Easier environment recreation
+
+This approach aligns with software engineering best practices and is particularly valuable when working with dbt Core.
+
+### What I Would Do Differently Next Time
+
+1. Install Python and create a virtual environment before installing dbt.
+2. Configure DBeaver before beginning implementation.
+3. Define local development tooling standards upfront.
+4. Document environment setup decisions earlier in the project.
+5. Create a standard project bootstrap checklist.
+
+---
+
+# Phase 3 - Staging Models
+
+*To be completed.*
+
+---
+
+# Phase 4 - Intermediate Models
+
+*To be completed.*
+
+---
+
+# Phase 5 - Dimensional Models
+
+*To be completed.*
+
+---
+
+# Phase 6 - Data Quality
+
+*To be completed.*
+
+---
+
+# Phase 7 - Documentation
+
+*To be completed.*
+
+---
+
+# Phase 8 - Reporting
+
+*To be completed.*
