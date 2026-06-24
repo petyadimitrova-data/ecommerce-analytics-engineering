@@ -4,3 +4,4 @@ desktop.ini
 duckdb/*.duckdb
 duckdb/*.wal
 .venv/
+dbt/logs/
