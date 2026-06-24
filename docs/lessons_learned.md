@@ -186,3 +186,15 @@ This approach aligns with software engineering best practices and is particularl
 # Phase 8 - Reporting
 
 *To be completed.*
+# End-of-Project Retrospective
+
+_To be completed after project delivery._
+
+Topics to revisit:
+
+- Working with AI as a brainstorming partner
+- Architecture decisions and project context
+- Enterprise patterns vs portfolio project patterns
+- Building a local Analytics Engineering environment
+- Planned architecture vs implemented architecture
+- What would be done differently in Project #2
