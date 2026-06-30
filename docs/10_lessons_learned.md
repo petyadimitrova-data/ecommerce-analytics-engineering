@@ -155,7 +155,38 @@ This approach aligns with software engineering best practices and is particularl
 
 # Phase 3 - Staging Models
 
-*To be completed.*
+## What I Learned
+
+### What I Learned About Python Virtual Environments
+
+Python virtual environments are session-specific. After reopening a terminal or restarting the machine, the virtual environment must be reactivated before using dbt.
+
+Forgetting to reactivate the environment can result in using a different global Python installation, leading to confusing version mismatches or missing package dependencies.
+
+This reinforced the importance of treating the virtual environment as an essential part of the daily Analytics Engineering workflow rather than a one-time project setup step.
+
+---
+
+### What I Learned About Staging Models
+
+Building the staging layer reinforced that its primary responsibility is **source standardization** rather than business transformation.
+
+During implementation I established consistent naming conventions, corrected source metadata inconsistencies (such as spelling mistakes), and standardized timestamp semantics while intentionally avoiding:
+
+* Business logic
+* Joins
+* Aggregations
+* Surrogate key generation
+* Business metric calculations
+
+One important design decision was to preserve source granularity.
+
+Instead of transforming timestamps into dates early in the pipeline, I retained the original level of detail and deferred business-specific interpretations to downstream models. This keeps the staging layer reusable and allows fact and dimension models to apply business rules without losing source information.
+
+Another valuable lesson was that **consistency across models is more valuable than optimizing each model individually**.
+
+Establishing common conventions before implementing all staging models resulted in a cleaner, more maintainable, and easier-to-understand Analytics Engineering codebase.
+
 
 ---
 

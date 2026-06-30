@@ -21,3 +21,13 @@ flowchart TD
     D --> E
     E --> F
 ```
+
+Architecture Version 2 Notes
+
+Implementation discoveries:
+
+- dbt Sources became an explicit architectural layer.
+- Staging responsibilities were formally defined.
+- Timestamp naming standards (_ts / _dt) introduced.
+- Source metadata standardization centralized in staging.
+- Business logic intentionally deferred to intermediate models.
