@@ -213,8 +213,6 @@ One of the biggest lessons for me was that data models should be designed based 
 
 This resulted in a cleaner and more reliable warehouse design.
 
----
-
 ## What I learned about dbt Macros
 
 Initially I thought dbt macros were mainly a way to reduce repetitive SQL.
@@ -226,6 +224,16 @@ I implemented my first custom macro, `normalize_text()`, to standardize city nam
 This allowed the business models to remain easy to read while keeping the transformation logic in a single reusable location.
 
 I also learned that inspecting the compiled SQL is one of the best ways to debug dbt macros and understand how Jinja generates the final SQL executed by the database.
+
+## What I learned about reusable Intermediate models
+
+Building the Geography model first made implementing the Customer model much simpler.
+
+Instead of duplicating geography transformations, the Customer model reuses the standardized Geography model and only enriches the customer records with latitude and longitude.
+
+This reinforced the idea that Intermediate models should encapsulate reusable business logic and serve as building blocks for other models.
+
+It also highlighted the importance of clearly defining ownership between models. The Customer model remains the owner of customer attributes, while the Geography model provides reusable geographic enrichment.
 
 ---
 

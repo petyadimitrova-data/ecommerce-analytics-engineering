@@ -49,3 +49,7 @@ Design principles:
 - business rules for geography standardization are implemented in reusable dbt macros
 
 The standardized Geography model provides a consistent geographic reference for downstream dimensions and fact tables.
+
+Implementation Note
+
+The standardized Geography model is reused by other Intermediate models to provide geographic enrichment while preserving ownership of business attributes within each domain model.
