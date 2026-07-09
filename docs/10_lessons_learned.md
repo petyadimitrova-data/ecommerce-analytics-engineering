@@ -192,22 +192,40 @@ Establishing common conventions before implementing all staging models resulted 
 
 # Phase 4 - Intermediate Models
 
-## What I learned about Data Profiling
+## What I learned about designing reusable business models
 
-Initially I assumed the Geography model could be built directly from the source tables.
+At first I assumed the Geography model could be built directly from the source tables.
 
-During implementation I discovered that architectural decisions should be driven by data profiling rather than assumptions.
+While exploring the source data in more detail, I discovered several inconsistencies that needed to be addressed before building downstream dimensions.
 
-Profiling identified:
+Some of the findings included:
 
-- inconsistent city spellings
-- duplicate geographic records
-- missing ZIP coverage
-- multiple coordinate observations
+- the same city stored with different spellings (for example, "sao paulo" and "são paulo")
+- multiple coordinate records for the same location
+- ZIP prefixes that belonged to more than one city
+- a small number of ZIP prefixes that appeared in more than one state
 
-Instead of immediately implementing SQL, I first profiled the source data, documented the findings and only then defined the transformation logic.
+Initially I assumed that ZIP prefix uniquely identified a geographic location. After validating the data, I realized this assumption was incorrect.
 
-This resulted in a cleaner and more defensible warehouse design.
+Instead of forcing the data to fit the original design, I updated the model grain to use the combination of State, City and ZIP Prefix.
+
+One of the biggest lessons for me was that data models should be designed based on how the data actually behaves, not on initial assumptions.
+
+This resulted in a cleaner and more reliable warehouse design.
+
+---
+
+## What I learned about dbt Macros
+
+Initially I thought dbt macros were mainly a way to reduce repetitive SQL.
+
+During implementation I realized they are much more valuable as reusable business transformations.
+
+I implemented my first custom macro, `normalize_text()`, to standardize city names by trimming whitespace, converting text to lowercase and removing Portuguese accented characters.
+
+This allowed the business models to remain easy to read while keeping the transformation logic in a single reusable location.
+
+I also learned that inspecting the compiled SQL is one of the best ways to debug dbt macros and understand how Jinja generates the final SQL executed by the database.
 
 ---
 
