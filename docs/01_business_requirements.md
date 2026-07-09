@@ -105,5 +105,5 @@ The solution should:
 * Provide a documented dimensional model aligned with business processes.
 * Deliver trusted and reusable business metrics.
 * Support analytical reporting across commercial, customer, logistics, and satisfaction domains.
-* Demonstrate Analytics Engineering best practices using Snowflake, dbt, SQL, Git version control, and documentation.
+* Demonstrate Analytics Engineering best practices using DuckDB, dbt, SQL, Git version control, and documentation.
 * Serve as a portfolio-quality project showcasing end-to-end Analytics Engineering capabilities.

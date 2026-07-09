@@ -192,7 +192,22 @@ Establishing common conventions before implementing all staging models resulted 
 
 # Phase 4 - Intermediate Models
 
-*To be completed.*
+## What I learned about Data Profiling
+
+Initially I assumed the Geography model could be built directly from the source tables.
+
+During implementation I discovered that architectural decisions should be driven by data profiling rather than assumptions.
+
+Profiling identified:
+
+- inconsistent city spellings
+- duplicate geographic records
+- missing ZIP coverage
+- multiple coordinate observations
+
+Instead of immediately implementing SQL, I first profiled the source data, documented the findings and only then defined the transformation logic.
+
+This resulted in a cleaner and more defensible warehouse design.
 
 ---
 
