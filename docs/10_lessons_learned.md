@@ -235,6 +235,26 @@ This reinforced the idea that Intermediate models should encapsulate reusable bu
 
 It also highlighted the importance of clearly defining ownership between models. The Customer model remains the owner of customer attributes, while the Geography model provides reusable geographic enrichment.
 
+## What I learned about defining the grain
+
+During implementation I discovered that the Orders and Order Items datasets are stored at different levels of detail.
+
+The Orders dataset contains one record per order, while the Order Items dataset contains one record per purchased item.
+
+At first I assumed `order_item_id` represented quantity, but after exploring the data I realized it identifies individual order lines.
+
+This reinforced the importance of understanding the grain of each dataset before designing downstream models. The business meaning of a table cannot always be inferred from column names alone.
+
+## What I learned about the role of the Intermediate layer
+
+At the beginning of the project, I thought the Intermediate layer was mainly where data from different staging models would be joined together.
+
+During implementation I realized that joins are only one possible transformation.
+
+The real purpose of the Intermediate layer is to provide stable business models for downstream layers. Some models enrich data by joining multiple sources, while others simply expose a clean, reusable business entity.
+
+This changed the way I think about the Intermediate layer. It is not defined by the type of SQL it contains, but by the role it plays within the warehouse architecture.
+
 ---
 
 # Phase 5 - Dimensional Models
