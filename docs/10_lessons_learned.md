@@ -274,7 +274,113 @@ This approach provides:
 
 # Phase 5 - Dimensional Models
 
-*To be completed.*
+## What I learned about surrogate keys
+
+While implementing the first dimension, I learned that surrogate keys are warehouse-generated identifiers that are independent of the source system.
+
+Initially I focused only on generating unique values. During implementation I also learned that concatenating business attributes should include explicit separators before hashing.
+
+Using separators makes the generated key unambiguous and follows a common best practice for surrogate key generation.
+
+I also learned that surrogate keys belong to the dimensional model rather than the source data and provide stable identifiers for downstream fact tables.
+
+## What I learned about the Date dimension
+
+Initially I assumed the Date dimension should contain separate columns for each business date, such as purchase date, delivery date and review date.
+
+During implementation I realized that a Date dimension represents only one business entity: a calendar date.
+
+The same Date dimension can then be reused multiple times by different fact tables, with each foreign key representing a different business event.
+
+For example:
+
+- Purchase Date
+- Approval Date
+- Shipping Limit Date
+- Delivery Date
+- Review Creation Date
+
+all reference the same Date dimension.
+
+This introduced me to the concept of a role-playing dimension, one of the fundamental design patterns in dimensional modeling.
+
+## What I learned about naming surrogate keys
+
+While designing the dimensions, I decided to distinguish surrogate keys from business keys using explicit naming.
+
+Business keys retain their original `_id` suffix while warehouse-generated surrogate keys use the `_sk` suffix.
+
+This convention makes it immediately clear whether a column originates from the source system or is generated within the warehouse.
+
+## What I learned about business keys
+
+While building the Customer dimension, I initially questioned why the source system contained both `customer_id` and `customer_unique_id`.
+
+During implementation I learned that `customer_id` and `customer_unique_id` represent different business concepts.
+
+`customer_id` identifies the customer record for a specific order, while `customer_unique_id` identifies the actual customer.
+
+This means one customer can have multiple `customer_id` values if they place multiple orders.
+
+This distinction allows the warehouse to answer both operational questions about individual orders and business questions about unique customers.
+
+For example:
+
+- How many unique customers purchased last year?
+- How many purchases has a particular customer made?
+- How many repeat customers do we have?
+
+This reinforced that understanding the business meaning of source keys is just as important as understanding their technical implementation.
+
+## What I learned about fact table grain
+
+While building the first fact table, I learned that the grain of a fact table determines both its measures and its relationships to dimensions.
+
+Because the grain of `fct_order_line` is one row per order item, no aggregation is required during loading. Each row already represents a single business event.
+
+This reinforced that defining the grain before writing SQL makes the implementation significantly simpler and helps avoid incorrect aggregations.
+
+## What I learned about fact table measures
+
+Initially I thought `order_item_id` could be used to represent the quantity purchased.
+
+During implementation I realized that `order_item_id` identifies the order line, not the quantity itself.
+
+In the Olist dataset each order line represents one purchased unit, so adding an explicit `quantity` measure makes the fact table easier to understand and simpler to use in reports.
+
+## What I learned about building the first star schema
+
+Building `fct_order_line` demonstrated how the different warehouse layers work together.
+
+The Intermediate layer prepares reusable business data, the Dimension layer provides descriptive business entities, and the Fact layer records business events by referencing dimensions through surrogate keys.
+
+This was the first point in the project where the complete dimensional model came together as a star schema.
+
+## What I learned about business dates
+
+While building the Review models, I discovered that a column name does not always match the actual data type.
+
+Although `review_creation_dt` looked like a business date, it was actually stored as a timestamp.
+
+To keep the Intermediate layer consistent, I exposed both the original timestamp (`review_creation_ts`) and the business date (`review_creation_dt`).
+
+This reinforced the importance of validating the source data instead of relying only on column names.
+
+
+---
+
+# Phase 5 Lessons Learned
+
+I would add one more lesson from today.
+
+```markdown
+## What I learned about business reality in a warehouse
+
+While validating the Delivery Performance fact, I found that some orders did not have a delivery date.
+
+At first this looked like a data quality issue, but it actually reflected the business process—those orders had not yet been delivered.
+
+This reinforced that good validation is not about eliminating every NULL value. It is about confirming that the warehouse correctly represents the underlying business reality.
 
 ---
 

@@ -42,102 +42,138 @@ Candidate Attributes:
 
 ## dim_seller
 
-Business Purpose:
-Represents merchants selling products through the marketplace.
+Business Purpose
 
-Primary Key:
+Provides descriptive information about marketplace sellers and their geographic location.
 
-* seller_sk
+Primary Key
 
-Business Key:
+- seller_sk
 
-* seller_id
+Business Key
 
-Relationships:
+- seller_id
 
-* geography_sk → dim_geography
+Candidate Attributes
 
-Candidate Attributes:
+- seller_id
+- state
+- city
+- zip_code_prefix
+- latitude
+- longitude
 
-* seller_id
+### Dimension Grain
+
+One row per seller.
 
 ---
 
 ## dim_geography
 
-Business Purpose:
-Reusable conformed dimension providing geographical enrichment for customers and sellers.
+Business Purpose
 
-Primary Key:
+Reusable conformed dimension providing geographic enrichment for customers and sellers.
 
-* geography_sk
+Primary Key
 
-Business Key:
+- geography_sk
 
-* zip_code_prefix
+Business Key
 
-Candidate Attributes:
+- state
+- city
+- zip_code_prefix
 
-* zip_code_prefix
-* city
-* state
-* latitude
-* longitude
+Candidate Attributes
+
+- state
+- city
+- zip_code_prefix
+- latitude
+- longitude
+
+### Dimension Grain
+
+One row per unique combination of:
+
+- State
+- City
+- ZIP Prefix
+
+### Dimension Grain
+
+One row per unique combination of:
+
+- State
+- City
+- ZIP Prefix
 
 ---
 
 ## dim_product
 
-Business Purpose:
-Represents products sold on the marketplace.
+Business Purpose
 
-Primary Key:
+Provides descriptive information about marketplace products and product categories.
 
-* product_sk
+Primary Key
 
-Business Key:
+- product_sk
 
-* product_id
+Business Key
 
-Candidate Attributes:
+- product_id
 
-* category_name_english
+Candidate Attributes
 
-Listing Attributes:
+- product_id
+- product_category_name
+- product_category_name_english
+- product_name_lenght
+- product_description_lenght
+- product_photos_qty
+- product_weight_g
+- product_length_cm
+- product_height_cm
+- product_width_cm
 
-* product_name_length
-* product_description_length
-* product_photos_qty
+### Dimension Grain
 
-Physical Attributes:
-
-* product_weight_g
-* product_length_cm
-* product_height_cm
-* product_width_cm
+One row per product.
 
 ---
 
 ## dim_date
 
-Business Purpose:
-Calendar dimension used for reporting and time-based analysis.
+Business Purpose
 
-Primary Key:
+Reusable calendar dimension supporting all date-based analysis across the warehouse.
 
-* date_sk
+Primary Key
 
-Candidate Attributes:
+- date_sk
 
-* calendar_date
-* day
-* month
-* quarter
-* year
-* week
-* day_of_week
-* month_name
-* quarter_name
+Business Key
+
+- calendar_date
+
+Candidate Attributes
+
+- calendar_date
+- year
+- quarter
+- month
+- month_name
+- week
+- day
+- day_name
+- day_of_week
+- is_weekend
+
+### Dimension Grain
+
+One row per calendar date.
 
 ---
 ## Open Modeling Decisions
@@ -171,30 +207,39 @@ Translation table acts as reference data and does not justify a standalone dimen
 
 ## fct_order_line
 
-Business Process:
+Business Process
+
 Customer purchases product(s) through the marketplace.
 
-Grain:
+Grain
+
 One row per order item.
 
-Source Tables:
+Source Models
 
-* olist_order_items_dataset
+- int_order_items
+- int_orders
 
-Measures:
+Measures
 
-* price
-* freight_value
+- price
+- freight_value
 
-Dimensions:
+Foreign Keys
 
-* dim_customer
-* dim_product
-* dim_seller
-* dim_date
+- customer_sk
+- product_sk
+- seller_sk
+- order_purchase_date_sk
 
-Purpose:
-Primary commercial fact supporting revenue, order volume, product performance, seller performance, and customer analytics.
+Degenerate Dimensions
+
+- order_id
+- order_item_id
+
+Purpose
+
+Primary commercial fact supporting revenue analysis, order volume, product performance, seller performance and customer analytics.
 
 ---
 

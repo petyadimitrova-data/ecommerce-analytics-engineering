@@ -18,9 +18,9 @@ Provide everything required for a developer to contribute to the project.
 
 ## Related Documents
 
-* implementation_plan.md
-* architecture.md
-* deployment_strategy.md
+* 05_architecture.md
+* 06_implementation_plan.md
+* 07_deployment_strategy.md
 
 ---
 
@@ -58,7 +58,42 @@ cd dbt\ecommerce_analytics
 
 ---
 
-## 4. Validate the Environment
+## 4. Verify the Active Git Branch
+
+Before beginning development, verify that you are working on the intended feature branch and that the working tree is clean.
+
+Check the active branch:
+
+```bash
+git branch
+```
+
+Example:
+
+```text
+* feature/dimensional-models
+  main
+```
+
+The active branch is indicated by the `*` symbol.
+
+Verify the repository status:
+
+```bash
+git status
+```
+
+Expected result:
+
+```text
+On branch feature/dimensional-models
+
+nothing to commit, working tree clean
+```
+
+---
+
+## 5. Validate the Environment
 
 ```bash
 dbt debug
@@ -72,7 +107,7 @@ All checks passed
 
 ---
 
-## 5. Begin Development
+## 6. Begin Development
 
 Edit SQL models under:
 
@@ -82,7 +117,7 @@ models/
 
 ---
 
-## 6. Build Models
+## 7. Build Models
 
 Build the entire project:
 
@@ -98,7 +133,7 @@ dbt run --select stg_orders
 
 ---
 
-## 7. Validate Results
+## 8. Validate Results
 
 Review the generated models in DuckDB using DBeaver.
 
@@ -112,7 +147,7 @@ Validation checklist:
 
 ---
 
-## 8. Commit Changes
+## 9. Commit Changes
 
 ```bash
 git add .
@@ -126,15 +161,19 @@ git push
 
 # Branch Strategy
 
-Development is performed using feature branches.
+Development is performed using dedicated feature branches.
 
 Typical workflow:
 
-1. Create a feature branch.
-2. Implement changes.
-3. Commit locally.
-4. Push the feature branch.
-5. Merge into `main` after the implementation milestone has been completed and reviewed.
+1. Create a feature branch from `main`.
+2. Verify the active branch before beginning development.
+3. Implement the planned changes.
+4. Commit changes locally using meaningful commit messages.
+5. Push the feature branch to GitHub.
+6. Open a Pull Request.
+7. Merge the Pull Request into `main` after the implementation milestone has been completed and validated.
+8. Delete the feature branch both remotely and locally.
+9. Create the next feature branch from the updated `main`.
 
 ---
 
@@ -144,8 +183,8 @@ Typical workflow:
 * Preserve source granularity
 * Standardize source naming
 * Avoid business logic in the staging layer
-* Validate before committing
 * Keep models focused on a single responsibility
+* Validate changes before committing
 
 ---
 
