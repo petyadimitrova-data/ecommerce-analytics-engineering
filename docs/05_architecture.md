@@ -53,3 +53,39 @@ The standardized Geography model provides a consistent geographic reference for 
 Implementation Note
 
 The standardized Geography model is reused by other Intermediate models to provide geographic enrichment while preserving ownership of business attributes within each domain model.
+
+### ADR-002 Surrogate Key Strategy
+
+The dimensional model uses surrogate keys to uniquely identify business entities within the warehouse.
+
+Design principles:
+
+- surrogate keys are generated in the Mart layer
+- surrogate keys use the `_sk` naming convention
+- business keys retain their original `_id` naming
+- business dimension surrogate keys are generated using `md5()`
+- the Date dimension uses an integer surrogate key in `YYYYMMDD` format
+- surrogate keys are independent of source system identifiers
+
+The surrogate key strategy provides stable dimension identifiers while preserving business keys for traceability and source system integration.
+
+Implementation Note
+
+Fact tables reference surrogate keys (`*_sk`) rather than business keys (`*_id`). Business keys remain available in the dimensions for auditing, troubleshooting and lineage back to the source systems.
+
+### ADR-003 Materialization Strategy
+
+Models are materialized according to their role within the warehouse.
+
+Design principles:
+
+- Staging models are materialized as views
+- Intermediate models are materialized as views
+- Dimension models are materialized as views
+- Fact models are materialized as tables
+
+This strategy keeps transformation layers lightweight while materializing the business reporting layer for efficient querying.
+
+Implementation Note
+
+Fact models are materialized as tables using folder-level configuration in `dbt_project.yml`. All other layers use dbt's default view materialization.
