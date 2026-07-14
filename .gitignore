@@ -1,2 +1,7 @@
 data/
 desktop.ini
+# DuckDB
+duckdb/*.duckdb
+duckdb/*.wal
+.venv/
+dbt/logs/
