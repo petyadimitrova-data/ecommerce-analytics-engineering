@@ -255,6 +255,21 @@ The real purpose of the Intermediate layer is to provide stable business models 
 
 This changed the way I think about the Intermediate layer. It is not defined by the type of SQL it contains, but by the role it plays within the warehouse architecture.
 
+### What I Learned About Feature Branches
+
+During the early stages of the project, I continued several implementation phases within the same feature branch. While this simplified development initially, the branch gradually accumulated multiple completed milestones and no longer accurately reflected the scope of work.
+
+This experience reinforced the importance of aligning feature branches with meaningful units of delivery rather than allowing them to grow throughout the project.
+
+Going forward, each major implementation phase will be developed in its own dedicated feature branch, merged into `main` after completion, and retired before the next phase begins.
+
+This approach provides:
+
+* Clearer project history
+* Smaller, reviewable units of work
+* Better traceability of implementation milestones
+* A workflow that more closely reflects professional software engineering practices
+
 ---
 
 # Phase 5 - Dimensional Models
