@@ -4,7 +4,7 @@
 
 Build an end-to-end Analytics Engineering solution using:
 
-- Snowflake
+- DuckDB
 - dbt
 - SQL
 - GitHub
