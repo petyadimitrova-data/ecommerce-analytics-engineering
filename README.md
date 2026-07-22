@@ -1,23 +1,177 @@
 # E-commerce Analytics Engineering Project
 
-## Goal
+An end-to-end Analytics Engineering portfolio project built using the Brazilian Olist E-commerce dataset.
 
-Build an end-to-end Analytics Engineering solution using:
+The objective of this project is to demonstrate modern Analytics Engineering practices, including dimensional modeling, dbt development, data quality testing, documentation, and version control.
 
-- Snowflake
-- dbt
+---
+
+# Project Goals
+
+Build a production-style analytics warehouse that demonstrates:
+
+- Modern layered architecture
+- Reusable dbt transformations
+- Kimball dimensional modeling
+- Automated data quality testing
+- Documentation and lineage
+- Git-based development workflow
+
+---
+
+# Technology Stack
+
+- DuckDB
+- dbt Core
 - SQL
-- GitHub
+- Git & GitHub
+- DBeaver
 
-## Planned Architecture
+---
 
-Raw Data
-→ Staging Layer
-→ Intermediate Layer
-→ Fact & Dimension Models
-→ Business Metrics
-→ Reporting Layer
+# Architecture
 
-## Status
+```
+Raw Sources
+      │
+      ▼
+ Staging Layer
+      │
+      ▼
+Intermediate Layer
+      │
+      ▼
+Dimensional Models
+      │
+      ▼
+Business Reporting
+```
 
-Project setup in progress.
+---
+
+# Project Structure
+
+```
+dbt/
+│
+├── staging/
+├── intermediate/
+├── marts/
+│   ├── dimensions/
+│   └── facts/
+│
+├── macros/
+├── tests/
+├── snapshots/
+└── seeds/
+
+docs/
+scripts/
+duckdb/
+```
+
+---
+
+# Current Progress
+
+## ✅ Completed
+
+### Data Ingestion
+
+- RAW data ingestion
+- Source registration in dbt
+
+### Staging Layer
+
+- Nine staging models
+- Source standardization
+- Naming conventions
+- Metadata cleanup
+
+### Intermediate Layer
+
+- Reusable business models
+- Geography standardization
+- Shared enrichment logic
+- Custom dbt macro
+
+### Dimensional Warehouse
+
+Dimensions
+
+- dim_customer
+- dim_date
+- dim_geography
+- dim_product
+- dim_seller
+
+Facts
+
+- fct_order_line
+- fct_payment
+- fct_review
+- fct_delivery_performance
+
+### Data Quality
+
+- Generic dbt tests
+- Relationship tests
+- Documentation
+- dbt Docs
+- Model lineage
+
+---
+
+# Repository Documentation
+
+The `/docs` directory contains the project's engineering documentation, including:
+
+- Business Requirements
+- Metric Definitions
+- Data Model Design
+- Architecture
+- Implementation Plan
+- Developer Guide
+- Engineering Decisions
+- Lessons Learned
+- Source Validation
+- dbt Macros
+
+---
+
+# Lessons Learned
+
+One of the biggest takeaways from this project has been learning that Analytics Engineering is as much about architecture and engineering decisions as it is about SQL.
+
+Designing reusable models, choosing the right level for business logic, documenting decisions, and balancing enterprise patterns with project scale have all been valuable learning experiences.
+
+---
+
+# Current Status
+
+🚧 Work in Progress
+
+Remaining work includes:
+
+- Additional business rule validation
+- Reporting layer
+- Interactive dashboards
+- Final documentation polish
+
+---
+
+# Future Improvements
+
+- Semantic metrics layer
+- Additional business marts
+- CI/CD pipeline
+- Automated deployment
+- Containerized development environment
+
+---
+
+# Author
+
+Petya Dimitrova
+
+Analytics Engineering Portfolio Project
