@@ -1,0 +1,55 @@
+version: 2
+
+models:
+
+  - name: fct_order_line
+    description: Fact table containing one row per purchased order item.
+
+    columns:
+
+      - name: customer_sk
+        description: Foreign key to the customer dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: product_sk
+        description: Foreign key to the product dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_sk
+
+      - name: seller_sk
+        description: Foreign key to the seller dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_seller')
+              field: seller_sk
+
+      - name: order_purchase_date_sk
+        description: Foreign key to the purchase date dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk
+
+      - name: quantity
+        description: Number of units represented by the order line.
+        tests:
+          - not_null
+
+      - name: price
+        description: Product price excluding freight charges.
+        tests:
+          - not_null
+
+      - name: freight_value
+        description: Freight charge for the order line.
+        tests:
+          - not_null
