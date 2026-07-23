@@ -3,7 +3,7 @@ version: 2
 models:
 
   - name: fct_order_line
-    description: Fact table containing one row per purchased order item.
+    description: Fact table containing one row per order line (one purchased order item).
 
     columns:
 
@@ -53,3 +53,117 @@ models:
         description: Freight charge for the order line.
         tests:
           - not_null
+
+  - name: fct_payment
+    description: Fact table containing one row per payment transaction.
+
+    columns:
+
+      - name: customer_sk
+        description: Foreign key to the customer dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: order_purchase_date_sk
+        description: Foreign key to the date dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk
+
+      - name: payment_value
+        description: Payment amount. (The value of the payment transaction.)
+        tests:
+          - not_null
+
+      - name: payment_type
+        description: Payment method. (The method of the payment transaction.)
+        tests:
+          - not_null
+
+      - name: payment_installments
+        description: Number of installments for the payment transaction.
+        tests:
+          - not_null
+
+      - name: payment_sequential
+        description: The sequential number of the payment transaction.
+        tests:
+          - not_null
+
+  - name: fct_review
+    description: Fact table containing one row per review.
+
+    columns:
+
+      - name: customer_sk
+        description: Foreign key to the customer dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: review_creation_date_sk
+        description: Foreign key to the date dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk
+
+      - name: review_score
+        description: The score given by the customer for the review.
+        tests:
+          - not_null
+
+      - name: review_id
+        description: Business identifier of the review.
+        tests:
+          - not_null
+
+      - name: order_id
+        description: Business identifier of the related order. (The ID of the order for which the review is submitted.)
+        tests:
+          - not_null
+
+  - name: fct_delivery_performance
+    description: Fact table containing one row per order used to measure delivery performance.
+
+    columns:
+
+      - name: customer_sk
+        description: Foreign key to the customer dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: order_delivered_date_sk
+        description: Foreign key to the delivery date dimension.
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk
+
+      - name: order_purchase_date_sk
+        description: Foreign key to the purchase date dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk
+
+      - name: delivery_days
+        description: Number of days between purchase and customer delivery.
+
+      - name: approval_days
+        description: Number of days between approval date and delivery date.
+
+      - name: delivered_on_time
+        description: Indicates whether the order was delivered on or before the estimated delivery date.
