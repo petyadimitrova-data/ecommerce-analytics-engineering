@@ -2,7 +2,7 @@
 
 An end-to-end Analytics Engineering portfolio project built using the Brazilian Olist E-commerce dataset.
 
-The objective of this project is to demonstrate modern Analytics Engineering practices, including dimensional modeling, dbt development, data quality testing, documentation, and version control.
+The objective of this project is to demonstrate modern Analytics Engineering practices, including dimensional modeling, dbt development, automated data quality testing, documentation, and Git-based version control.
 
 ---
 
@@ -26,6 +26,17 @@ Build a production-style analytics warehouse that demonstrates:
 - SQL
 - Git & GitHub
 - DBeaver
+
+---
+
+# Key Features
+
+- End-to-end Analytics Engineering workflow
+- Kimball dimensional modeling
+- Layered dbt architecture (Staging → Intermediate → Marts)
+- Automated data quality testing (97 tests)
+- Comprehensive project documentation
+- Git feature branch development workflow
 
 ---
 
@@ -115,10 +126,12 @@ Facts
 ### Data Quality
 
 - Generic dbt tests
+- Custom business rule tests
 - Relationship tests
-- Documentation
+- Model documentation
 - dbt Docs
 - Model lineage
+- 97 automated tests passing
 
 ---
 
@@ -131,6 +144,8 @@ The `/docs` directory contains the project's engineering documentation, includin
 - Data Model Design
 - Architecture
 - Implementation Plan
+- Data Quality
+- Architecture Decision Records (ADRs)
 - Developer Guide
 - Engineering Decisions
 - Lessons Learned
@@ -149,11 +164,19 @@ Designing reusable models, choosing the right level for business logic, document
 
 # Current Status
 
-🚧 Work in Progress
+🚧 Final Project Polish
 
-Remaining work includes:
+Completed:
 
-- Additional business rule validation
+- Data ingestion
+- Layered dbt architecture
+- Dimensional warehouse
+- Automated data quality testing
+- Documentation
+- dbt Docs
+
+Remaining work:
+
 - Reporting layer
 - Interactive dashboards
 - Final documentation polish

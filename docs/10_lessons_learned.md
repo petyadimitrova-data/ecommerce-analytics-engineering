@@ -371,10 +371,7 @@ This reinforced the importance of validating the source data instead of relying 
 
 # Phase 5 Lessons Learned
 
-I would add one more lesson from today.
-
-```markdown
-## What I learned about business reality in a warehouse
+## What I learned aout business reality in a warehouse
 
 While validating the Delivery Performance fact, I found that some orders did not have a delivery date.
 
@@ -384,30 +381,112 @@ This reinforced that good validation is not about eliminating every NULL value. 
 
 ---
 
-# Phase 6 - Data Quality
+# Phase 6 - Documentation
 
-*To be completed.*
+## What I learned about documenting engineering decisions
+
+At the beginning of the project, I viewed documentation as something that would be written after the implementation was complete.
+
+As the project progressed, I realized that documenting design decisions while they were still fresh made the documentation significantly more accurate and easier to maintain.
+
+Keeping architecture documents, implementation notes, and lessons learned up to date throughout the project meant that the final documentation required only minor refinement instead of a complete rewrite.
+
+This reinforced that documentation should be treated as part of the engineering process rather than a final deliverable.
 
 ---
 
-# Phase 7 - Documentation
+## Project Structure Should Evolve with the Solution
 
-*To be completed.*
+One unexpected lesson from this project was that the original roadmap was not the final roadmap.
+
+At the beginning, implementation, testing, repository polish, and reporting were planned as separate project stages. As development progressed, it became clear that data quality testing was an integral part of the Analytics Engineering implementation rather than a standalone phase. Likewise, repository organization and documentation naturally evolved throughout the project instead of being completed at the end.
+
+Rather than following the original plan rigidly, the project structure was simplified to better represent the completed solution.
+
+Final project structure:
+
+- Project Management
+- Data Model Design
+- Analytics Engineering Implementation
+- Dashboard & Reporting
+
+This experience reinforced that project plans should guide implementation, not constrain it. As understanding improves, the roadmap should evolve to reflect the solution rather than the original assumptions.
+
+# Final Project Retrospective
+
+## What I learned about Analytics Engineering
+
+Before starting this project, my understanding of Analytics Engineering was largely based on individual concepts such as SQL, dbt, and dimensional modeling.
+
+Building a complete end-to-end solution showed me that Analytics Engineering is the combination of many complementary disciplines rather than a single technology.
+
+It includes data modeling, transformation design, testing, documentation, version control, deployment strategy, and an understanding of business requirements.
+
+The project demonstrated that producing reliable analytical data is not only about writing SQL—it is about designing systems that are understandable, maintainable, and trusted by their users.
+
+This project significantly changed how I think about Analytics Engineering and provided a much deeper appreciation for the engineering practices behind modern analytics platforms.
+
+
+Completing this project provided a much deeper understanding of Analytics Engineering than I initially expected.
+
+Beyond learning individual technologies such as DuckDB and dbt, the project demonstrated how planning, data modeling, implementation, testing, documentation, and version control work together to create a reliable analytical solution.
+
+Several key reflections stand out.
+
+## Working with AI as an Engineering Partner
+
+One of the biggest takeaways was learning how to collaborate effectively with AI throughout an engineering project.
+
+Rather than treating AI as a code generator, I found the greatest value in using it as a brainstorming partner, design reviewer, and quality assurance resource.
+
+As my confidence grew, the collaboration naturally shifted from asking "How do I build this?" to asking "Does this implementation make sense?" and "Can this design be improved?"
+
+This approach helped me better understand the reasoning behind engineering decisions instead of simply producing working code.
 
 ---
 
-# Phase 8 - Reporting
+## Enterprise Patterns vs Portfolio Projects
 
-*To be completed.*
-# End-of-Project Retrospective
+Working on a portfolio project highlighted the difference between demonstrating technical capability and replicating an enterprise environment.
 
-_To be completed after project delivery._
+Many enterprise practices—such as layered architectures, documentation standards, naming conventions, testing, and Git workflows—translated directly into the project.
 
-Topics to revisit:
+At the same time, local tools such as DuckDB made it possible to focus on Analytics Engineering concepts without the complexity of cloud infrastructure.
 
-- Working with AI as a brainstorming partner
-- Architecture decisions and project context
-- Enterprise patterns vs portfolio project patterns
-- Building a local Analytics Engineering environment
-- Planned architecture vs implemented architecture
-- What would be done differently in Project #2
+---
+
+## Building a Local Analytics Engineering Environment
+
+Creating a complete local development environment provided valuable insight into the technologies that support modern Analytics Engineering.
+
+Managing Python virtual environments, configuring dbt Core, connecting DuckDB, using DBeaver, and integrating GitHub provided a much deeper understanding than working exclusively in managed cloud platforms.
+
+---
+
+## Planned Architecture vs Implemented Architecture
+
+Although the project began with a detailed implementation plan, several architectural decisions evolved during development.
+
+Examples included refining the Geography model grain, improving reusable Intermediate models, integrating testing into the implementation process, and simplifying the overall project roadmap.
+
+This reinforced that good architecture is iterative and should evolve as understanding of the data improves.
+
+---
+
+## Looking Ahead to Project #2
+
+For the next Analytics Engineering project, I plan to take a more independent implementation approach.
+
+Rather than relying on AI for initial design decisions, I intend to develop the architecture and implementation myself before using AI primarily as a reviewer for quality assurance, design validation, and constructive feedback.
+
+This should strengthen my own engineering decision-making while still benefiting from independent review.
+
+---
+
+## Final Reflection
+
+This project successfully achieved its primary objective: demonstrating an end-to-end Analytics Engineering workflow while significantly deepening my understanding of the discipline.
+
+More importantly, it reinforced that Analytics Engineering is not defined by a single technology. It is the combination of data modeling, transformation design, testing, documentation, deployment practices, and continuous learning that creates reliable analytical systems.
+
+Project Structure Should Evolve with the Solution.

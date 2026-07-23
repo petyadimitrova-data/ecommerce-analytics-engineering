@@ -18,38 +18,100 @@ Version Control:
 - Git/GitHub
 
 Reporting:
-- TBD
+- Power BI (planned)
 
 ## Implementation Phases
 
-Phase 1 - Data Ingestion
-- Load source files into RAW layer
+### Phase 1 - Data Ingestion
+
+- Load source files into the RAW layer
 - Validate row counts and source completeness
 
-Phase 2 - Staging Models
+### Phase 2 - dbt Initialization
+
+- Configure the dbt project
+- Set up the local development environment
+- Configure DuckDB connection
+
+### Phase 3 - Staging
+
 - Standardize naming conventions
 - Apply basic data cleansing
 - Create source-aligned staging models
 
-Phase 3 - Intermediate Models
+### Phase 4 - Intermediate
+
 - Create reusable business logic models
 - Prepare data for dimensional modeling
 
-Phase 4 - Dimensional Models
+### Phase 5 - Dimensional Models
+
 - Build dimensions
 - Build fact tables
 - Validate relationships
 
-Phase 5 - Data Quality
-- Implement source tests
-- Implement model tests
-- Validate business metrics
+### Phase 6 - Data Quality
 
-Phase 6 - Documentation
+- Implement generic dbt tests
+- Implement custom business rule tests
+- Validate model integrity
+
+### Phase 7 - Documentation
+
 - Document models and lineage
 - Document architecture and design decisions
-- Document business metrics and assumptions
+- Document deployment strategy
+- Document lessons learned
 
-Phase 7 - Reporting
-- Create analytical reporting layer
-- Build portfolio demonstration dashboards
+---
+
+# Project Evolution
+
+During the implementation of this project, the roadmap evolved to better reflect the natural Analytics Engineering workflow.
+
+The initial plan separated implementation, testing, repository polish, and reporting into individual project stages. As development progressed, testing became an integral part of the Analytics Engineering implementation through automated dbt testing, while repository organization was completed alongside the engineering work.
+
+The final project structure was simplified to better represent the completed solution.
+
+## Final Roadmap (23-Jul-2026)
+
+```text
+01 - Project Management
+Planning
+Requirements
+Architecture
+Scope
+
+↓
+
+02 - Data Model Design
+Business Understanding
+Kimball Modeling
+Metrics
+Grain
+Relationships
+
+↓
+
+03 - Analytics Engineering Implementation
+
+Everything technical.
+
+DuckDB
+dbt
+SQL
+Staging
+Intermediate
+Facts
+Dimensions
+Tests
+Documentation
+Deployment
+
+↓
+
+04 - Dashboard & Reporting
+The business outcome.
+```
+
+The reporting phase is intentionally separated from the Analytics Engineering implementation to emphasize the distinction between building a trusted analytical data model and delivering business insights through dashboards and visualizations.

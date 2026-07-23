@@ -71,7 +71,7 @@ git branch
 Example:
 
 ```text
-* feature/dimensional-models
+* feature/<feature-name>
   main
 ```
 
@@ -86,7 +86,7 @@ git status
 Expected result:
 
 ```text
-On branch feature/dimensional-models
+On branch feature/<feature-name>
 
 nothing to commit, working tree clean
 ```

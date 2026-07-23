@@ -101,14 +101,6 @@ One row per unique combination of:
 - City
 - ZIP Prefix
 
-### Dimension Grain
-
-One row per unique combination of:
-
-- State
-- City
-- ZIP Prefix
-
 ---
 
 ## dim_product
@@ -174,34 +166,6 @@ Candidate Attributes
 ### Dimension Grain
 
 One row per calendar date.
-
----
-## Open Modeling Decisions
-
-Customer Business Key
-* Assumption:
-customer_unique_id represents the actual business customer.
-
-* Validation Required:
-Confirm relationship between customer_id and customer_unique_id.
-
-Geography Modeling
-
-* Decision:
-Create reusable dim_geography.
-
-* Rationale:
-Geographical attributes are shared by customers and sellers and support future geospatial analysis.
-
-Product Category
-
-* Decision:
-Store translated category name within dim_product.
-
-* Rationale:
-Translation table acts as reference data and does not justify a standalone dimension.
-
----
 
 # Candidate Fact Tables
 

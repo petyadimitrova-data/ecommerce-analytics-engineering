@@ -118,7 +118,7 @@ Therefore the Geography business key becomes
 
 (State, City, ZIP Prefix)
 
-rather than ZIP Prefix alone. The SK in the dim will be state + city + zip prefix
+rather than ZIP Prefix alone. The Geography surrogate key is generated from the combination of State, City, and ZIP Prefix.
 
 Additional Profiling Findings
 
