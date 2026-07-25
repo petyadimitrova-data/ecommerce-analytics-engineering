@@ -5,3 +5,7 @@ duckdb/*.duckdb
 duckdb/*.wal
 .venv/
 dbt/logs/
+docs/daily_handoffs.md
+docs/dax_learning_notes.md
+powerbi/**/.pbi/cache.abf
+powerbi/**/.pbi/localSettings.json
