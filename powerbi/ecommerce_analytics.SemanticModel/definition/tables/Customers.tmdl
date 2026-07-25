@@ -1,0 +1,85 @@
+table Customers
+	lineageTag: b12fc8e9-fee2-4742-9e35-6b7122125d17
+
+	column customer_sk
+		dataType: string
+		isHidden
+		lineageTag: 438c2700-f3eb-4df1-be23-776b229df609
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 50064ff0-5649-4313-8e2e-c997561d6e09
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: ab780100-63da-4720-b42a-b0d0aa29ebfe
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 6c87aa8f-eee4-4c8b-a8c7-fa1a2cf30c36
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 196eb08a-fa4b-4df4-ab96-85aad66dc64f
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code_prefix
+		dataType: string
+		lineageTag: 138398b9-9237-4d5f-870e-29a5b551cd40
+		summarizeBy: none
+		sourceColumn: zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: ed08aa3f-0934-48d2-87e2-dd5da6262aa6
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: cdb3af5d-e5ff-458b-ad60-f7dc8c7ce600
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Customers = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "dim_customer", Schema = "main", Catalog = "olist"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+

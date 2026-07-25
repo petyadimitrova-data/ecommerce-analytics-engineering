@@ -490,3 +490,21 @@ This project successfully achieved its primary objective: demonstrating an end-t
 More importantly, it reinforced that Analytics Engineering is not defined by a single technology. It is the combination of data modeling, transformation design, testing, documentation, deployment practices, and continuous learning that creates reliable analytical systems.
 
 Project Structure Should Evolve with the Solution.
+
+### Power BI Custom Connector Location
+
+When using custom Power Query connectors (.mez), Power BI may look for the
+`Power BI Desktop\Custom Connectors` folder under the OneDrive Documents directory
+instead of the local Documents folder.
+
+On systems where Windows redirects the Documents library to OneDrive, placing the
+connector under:
+
+C:\Users\<User>\OneDrive\Documents\Power BI Desktop\Custom Connectors
+
+allowed Power BI to successfully discover the custom DuckDB connector.
+
+This is an environment-specific configuration that may not be obvious from the installation guide.
+
+
+Automatic relationship detection should never be blindly trusted in a dimensional model.

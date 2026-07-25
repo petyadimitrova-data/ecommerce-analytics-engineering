@@ -1,0 +1,118 @@
+table Calendar
+	lineageTag: 14765fe6-3f81-4fa3-9ab7-f68614d6c86f
+
+	column date_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a090c60f-129b-4390-a631-666086afd261
+		summarizeBy: none
+		sourceColumn: date_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column calendar_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4f9b5f48-9d43-4bf8-912e-844617d8e779
+		summarizeBy: none
+		sourceColumn: calendar_date
+
+		variation Variation
+			isDefault
+			relationship: 5ec34eeb-1c0c-4430-8b3b-225fb50e14e3
+			defaultHierarchy: LocalDateTable_af5d10d5-2fe1-4389-b0b6-569ded90934e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 95673923-882b-45cc-a22c-8c14dc6fc664
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 331e6e29-2d09-49af-9904-9d3a0db6a075
+		summarizeBy: sum
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 76e25b48-5d81-4af3-a3cb-257ab036408e
+		summarizeBy: sum
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: 6eda1590-1273-40d2-ac10-33486ed6fd9d
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column week
+		dataType: int64
+		formatString: 0
+		lineageTag: 51b0694f-f7e8-4e27-8fd9-fabde7e6c6d1
+		summarizeBy: sum
+		sourceColumn: week
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		dataType: int64
+		formatString: 0
+		lineageTag: 1be5b32e-9df3-4c5f-a8a2-24f6757dc66f
+		summarizeBy: sum
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		lineageTag: df6e9188-f04a-498e-a0dc-078ffc5b8dbf
+		summarizeBy: none
+		sourceColumn: day_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		lineageTag: 378c6bb9-af0b-41d2-a4a8-4e7056c50112
+		summarizeBy: sum
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: string
+		lineageTag: d5373655-2398-4b25-8ee3-a9c5279554f4
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "dim_date", Schema = "main", Catalog = "olist"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+

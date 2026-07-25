@@ -1,0 +1,79 @@
+table Reviews
+	lineageTag: 60387a80-55b1-4798-9247-8248f5d65964
+
+	column customer_sk
+		dataType: string
+		isHidden
+		lineageTag: a0a2b96f-a7a0-446d-8b85-d8f316d08a72
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_creation_date_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 90d937d9-b8d2-4326-b729-8a0039744d14
+		summarizeBy: none
+		sourceColumn: review_creation_date_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_id
+		dataType: string
+		lineageTag: ddae0bf7-4e88-4a91-9876-1f03eb42e685
+		summarizeBy: none
+		sourceColumn: review_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 918bf8c7-e614-4bd9-8029-87fded9f211c
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_comment_title
+		dataType: string
+		lineageTag: b3e6a9a5-4578-46a4-aae7-53c117bcca6f
+		summarizeBy: none
+		sourceColumn: review_comment_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_comment_message
+		dataType: string
+		lineageTag: 659aede5-9463-4138-96f2-5bd2f76efb56
+		summarizeBy: none
+		sourceColumn: review_comment_message
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Review Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 96afb3b1-8a54-4799-b931-04a0f2461ca4
+		summarizeBy: sum
+		sourceColumn: Review Score
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Reviews = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "fct_review", Schema = "main", Catalog = "olist"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"review_score", "Review Score"}})
+				in
+				  #"Renamed Columns"
+
+	changedProperty = Name
+

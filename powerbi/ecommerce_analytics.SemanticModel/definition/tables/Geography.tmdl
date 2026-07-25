@@ -1,0 +1,66 @@
+table Geography
+	lineageTag: 822fe0ae-ccdb-41e1-96fd-5fe140df10f4
+
+	column geography_sk
+		dataType: string
+		lineageTag: 763fc075-a55e-4d9a-84f6-d29030b8df2d
+		summarizeBy: none
+		sourceColumn: geography_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 3ea7df8f-dcc9-4504-81aa-6113e046efe8
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: ccd25877-4cea-45d9-97ab-a1d3a4e3d92a
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code_prefix
+		dataType: string
+		lineageTag: 08d71b3e-f299-4036-beb0-764149f947dd
+		summarizeBy: none
+		sourceColumn: zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: a37bff81-b15b-42e6-b04b-c51e0201ef73
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 123bebdc-671b-41cf-b4d7-ee3a5ff78ca0
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Geography = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "dim_geography", Schema = "main", Catalog = "olist"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+

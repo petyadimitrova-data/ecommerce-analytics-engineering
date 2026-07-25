@@ -1,0 +1,82 @@
+table Payments
+	lineageTag: dfb27372-f8e1-4d72-a255-b3cfcfecca4c
+
+	column customer_sk
+		dataType: string
+		isHidden
+		lineageTag: 6a7a7764-4e30-44eb-9eb9-4277691aa057
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_purchase_date_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 200134b2-b853-4520-ab05-6bc6048fe202
+		summarizeBy: none
+		sourceColumn: order_purchase_date_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 6332eea4-0f73-4b5f-92ec-e5e3cd8bc64c
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_sequential
+		dataType: int64
+		formatString: 0
+		lineageTag: fa00ed69-7b67-458b-9ced-4c8df3fe6630
+		summarizeBy: sum
+		sourceColumn: payment_sequential
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_type
+		dataType: string
+		lineageTag: 9c626c9d-35d7-4fa0-982d-b6c783d2c877
+		summarizeBy: none
+		sourceColumn: payment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_installments
+		dataType: int64
+		formatString: 0
+		lineageTag: d295daa3-2b7c-434a-bd2b-cb162612cb3b
+		summarizeBy: sum
+		sourceColumn: payment_installments
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Amount'
+		dataType: double
+		lineageTag: 5e7e282b-48f4-4ca7-838e-0e5dc8d7eb61
+		summarizeBy: sum
+		sourceColumn: Payment Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Payments = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "fct_payment", Schema = "main", Catalog = "olist"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"payment_value", "Payment Amount"}})
+				in
+				  #"Renamed Columns"
+
+	changedProperty = Name
+

@@ -1,0 +1,120 @@
+table Orders
+	lineageTag: 6b54413f-73b5-46a5-83fb-5f47d5c2e91e
+
+	measure 'Active Customers' = DISTINCTCOUNT(Orders[customer_sk])
+		formatString: 0
+		lineageTag: 22d9e10c-f0fa-4971-9ecc-9c0bc4991176
+
+	measure 'Average Order Value' = DIVIDE([Total Revenue], [Total Orders])
+		lineageTag: beb75480-b766-4887-a6b8-20452e08f1b2
+
+	measure 'Total Orders' = DISTINCTCOUNT(Orders[order_id])
+		formatString: 0
+		lineageTag: 406faaf5-6424-44f7-9a29-2acdb7743e83
+
+	measure 'Total Revenue' = SUM(Orders[Item Price])
+		lineageTag: 20e223da-ca6e-4e6e-95f0-f74dd492f3ae
+
+	column customer_sk
+		dataType: string
+		isHidden
+		lineageTag: 3226f960-6b30-42a2-91f5-a04ebe101176
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_sk
+		dataType: string
+		isHidden
+		lineageTag: 83c73e74-4519-4c73-bc86-f12abaf419a3
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_sk
+		dataType: string
+		isHidden
+		lineageTag: d42fb218-d7ba-4955-9af1-49a1ece7fbda
+		summarizeBy: none
+		sourceColumn: seller_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_purchase_date_sk
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 31b0417d-15a5-4042-b6b9-9d7e22cfc553
+		summarizeBy: none
+		sourceColumn: order_purchase_date_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 71875140-30c0-44fa-ad41-d98cf29c29c7
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_item_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b2edc28-4afa-44a5-96ae-3429da17ecf1
+		summarizeBy: sum
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ad11709-c495-423a-b3c0-82c2b317d057
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Item Price'
+		dataType: double
+		lineageTag: c8de7de5-0234-4267-a1ae-be50ae60637e
+		summarizeBy: sum
+		sourceColumn: Item Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Freight Cost'
+		dataType: double
+		lineageTag: 218c7c25-c84c-43ef-8b1e-52f59532825b
+		summarizeBy: sum
+		sourceColumn: Freight Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Orders = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "fct_order_line", Schema = "main", Catalog = "olist"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"price", "Item Price"}, {"freight_value", "Freight Cost"}, {"quantity", "Quantity"}})
+				in
+				  #"Renamed Columns"
+
+	changedProperty = Name
+

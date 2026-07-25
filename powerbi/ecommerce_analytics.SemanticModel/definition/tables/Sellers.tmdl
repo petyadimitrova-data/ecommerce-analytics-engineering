@@ -1,0 +1,77 @@
+table Sellers
+	lineageTag: 094198d3-4134-4b07-8e39-552a1560a84a
+
+	column seller_sk
+		dataType: string
+		isHidden
+		lineageTag: 10d229be-b024-4984-8bde-d2e2baf11bae
+		summarizeBy: none
+		sourceColumn: seller_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_id
+		dataType: string
+		lineageTag: 55f92aa0-be4f-42a0-bcc5-7a5d2a9f6dad
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 29ce241c-9fc1-4cc0-ba58-e8204006da9f
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 93c205cc-e0e2-4dc1-be48-f0a943a05fdf
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code_prefix
+		dataType: string
+		lineageTag: 56cf5a19-d406-4442-9fae-543f817d8139
+		summarizeBy: none
+		sourceColumn: zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: a913ef34-025d-49f9-b6dd-e20582753c09
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 7847eba2-7ab7-41f6-a798-8d61f6017582
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Sellers = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "dim_seller", Schema = "main", Catalog = "olist"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+

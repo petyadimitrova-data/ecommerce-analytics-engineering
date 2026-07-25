@@ -1,0 +1,46 @@
+relationship 5ec34eeb-1c0c-4430-8b3b-225fb50e14e3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.calendar_date
+	toColumn: LocalDateTable_af5d10d5-2fe1-4389-b0b6-569ded90934e.Date
+
+relationship AutoDetected_1c1977f6-c19c-476f-b36a-e3914d3cdca1
+	fromColumn: Orders.product_sk
+	toColumn: Products.product_sk
+
+relationship AutoDetected_520196f7-2944-4542-9aad-21f84a7ffcd1
+	fromColumn: Orders.seller_sk
+	toColumn: Sellers.seller_sk
+
+relationship c4f10518-e8aa-a610-bc8b-e7cb65fc9c8d
+	fromColumn: Orders.customer_sk
+	toColumn: Customers.customer_sk
+
+relationship 933695bb-3085-a55d-f974-0d4624db9a9d
+	fromColumn: Reviews.review_creation_date_sk
+	toColumn: Calendar.date_sk
+
+relationship 557ede50-c99c-636e-2f10-c0695ec499ca
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Delivery Performance'.customer_sk
+	toColumn: Customers.customer_sk
+
+relationship f5d81807-7b42-262c-653a-b39f6baba9b9
+	fromColumn: Orders.order_purchase_date_sk
+	toColumn: Calendar.date_sk
+
+relationship f70ff77d-72b8-dfad-910d-2a432153e35b
+	fromColumn: 'Delivery Performance'.order_purchase_date_sk
+	toColumn: Calendar.date_sk
+
+relationship 125ae797-fc83-ca24-91ed-b635562d5758
+	fromColumn: Payments.order_purchase_date_sk
+	toColumn: Calendar.date_sk
+
+relationship d2aeb542-4114-d0e2-d1fc-84a9599ae6cf
+	fromColumn: Reviews.customer_sk
+	toColumn: Customers.customer_sk
+
+relationship 24e0b275-0343-6de3-da5d-6362f91b57eb
+	fromColumn: Payments.customer_sk
+	toColumn: Customers.customer_sk
+

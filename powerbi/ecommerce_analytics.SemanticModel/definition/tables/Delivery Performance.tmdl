@@ -1,0 +1,76 @@
+table 'Delivery Performance'
+	lineageTag: 6a9e6e5b-2ad3-4807-a95a-e9c1eb659b7a
+
+	column customer_sk
+		dataType: string
+		lineageTag: 8dec7e33-5fcb-4ff0-a106-3acbff400565
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_purchase_date_sk
+		dataType: int64
+		formatString: 0
+		lineageTag: 693ce38f-add5-459b-b088-c94cf7b6036a
+		summarizeBy: none
+		sourceColumn: order_purchase_date_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_delivered_date_sk
+		dataType: int64
+		formatString: 0
+		lineageTag: 15ee3e15-292d-45c2-a00a-e182fd25688c
+		summarizeBy: sum
+		sourceColumn: order_delivered_date_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 216f36e4-4ee8-4395-a0ff-73b206a84881
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Approval Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a1d5848-7e8e-4e4c-ab7b-ec4fa91ded2f
+		summarizeBy: sum
+		sourceColumn: Approval Days
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d1b436b-9423-4ca3-b9bd-4a0149792993
+		summarizeBy: sum
+		sourceColumn: Delivery Days
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivered On Time'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4dc4a116-1466-4ac0-820e-c41f5afb3c39
+		summarizeBy: sum
+		sourceColumn: Delivered On Time
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Delivery Performance' = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "fct_delivery_performance", Schema = "main", Catalog = "olist"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"approval_days", "Approval Days"}, {"delivered_on_time", "Delivered On Time"}, {"delivery_days", "Delivery Days"}})
+				in
+				  #"Renamed Columns"
+
+	changedProperty = Name
+

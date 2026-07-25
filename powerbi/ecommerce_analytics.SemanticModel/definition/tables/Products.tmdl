@@ -1,0 +1,113 @@
+table Products
+	lineageTag: e0ddfe7b-859e-4958-bfdb-78978c888a9d
+
+	column product_sk
+		dataType: string
+		isHidden
+		lineageTag: d46fb1a8-ff0e-45e7-ba61-eebef1205b9d
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 49f5f63c-c0b5-476e-b139-b9a9470b71ef
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category_name
+		dataType: string
+		lineageTag: db1f9144-6e75-46d4-acb9-51a2f866723f
+		summarizeBy: none
+		sourceColumn: product_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: 19786afe-1cd1-4d69-8645-18c8e6b67259
+		summarizeBy: none
+		sourceColumn: Product Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name_length
+		dataType: int64
+		formatString: 0
+		lineageTag: 0376bf1c-2aca-4238-a341-9c6cd3bf65aa
+		summarizeBy: none
+		sourceColumn: product_name_length
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_description_length
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ac6e43a-7bf0-424a-ac43-7558f81cdbdd
+		summarizeBy: none
+		sourceColumn: product_description_length
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_photos_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 461394b9-fd85-4bcb-a514-43db24052b08
+		summarizeBy: none
+		sourceColumn: product_photos_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_weight_g
+		dataType: int64
+		formatString: 0
+		lineageTag: e30670ab-d4d8-4364-999d-9030ccffb25a
+		summarizeBy: none
+		sourceColumn: product_weight_g
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_length_cm
+		dataType: int64
+		formatString: 0
+		lineageTag: 38bd3a94-42b3-4b94-a29d-34248a73378a
+		summarizeBy: none
+		sourceColumn: product_length_cm
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_height_cm
+		dataType: int64
+		formatString: 0
+		lineageTag: 96aa5362-f7bc-466d-8283-7d6db0b93333
+		summarizeBy: none
+		sourceColumn: product_height_cm
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_width_cm
+		dataType: int64
+		formatString: 0
+		lineageTag: d821e534-1615-446b-9d01-be0ceef3d1ed
+		summarizeBy: none
+		sourceColumn: product_width_cm
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Products = m
+		mode: import
+		source =
+				let
+				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
+				  #"Navigation 1" = Source{[Item = "dim_product", Schema = "main", Catalog = "olist"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"product_category_name", "product_category_name"}, {"product_category_name_english", "Product Category"}})
+				in
+				  #"Renamed Columns"
+
+	changedProperty = Name
+
