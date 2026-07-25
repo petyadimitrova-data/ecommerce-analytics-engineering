@@ -2,18 +2,20 @@
 
 An end-to-end Analytics Engineering portfolio project built using the Brazilian Olist E-commerce dataset.
 
-The objective of this project is to demonstrate modern Analytics Engineering practices, including dimensional modeling, dbt development, automated data quality testing, documentation, and Git-based version control.
+The objective of this project is to demonstrate modern Analytics Engineering practices, including dimensional modeling, dbt development, automated data quality testing, semantic modeling, Power BI reporting, documentation, and Git-based version control.
 
 ---
 
 # Project Goals
 
-Build a production-style analytics warehouse that demonstrates:
+Build a production-style Analytics Engineering solution that demonstrates:
 
 - Modern layered architecture
 - Reusable dbt transformations
 - Kimball dimensional modeling
 - Automated data quality testing
+- Semantic modeling in Power BI
+- Interactive business reporting
 - Documentation and lineage
 - Git-based development workflow
 
@@ -24,6 +26,7 @@ Build a production-style analytics warehouse that demonstrates:
 - DuckDB
 - dbt Core
 - SQL
+- Power BI
 - Git & GitHub
 - DBeaver
 
@@ -35,6 +38,8 @@ Build a production-style analytics warehouse that demonstrates:
 - Kimball dimensional modeling
 - Layered dbt architecture (Staging → Intermediate → Marts)
 - Automated data quality testing (97 tests)
+- Power BI semantic model
+- Interactive business reporting
 - Comprehensive project documentation
 - Git feature branch development workflow
 
@@ -43,19 +48,22 @@ Build a production-style analytics warehouse that demonstrates:
 # Architecture
 
 ```
-Raw Sources
-      │
-      ▼
- Staging Layer
-      │
-      ▼
-Intermediate Layer
-      │
-      ▼
-Dimensional Models
-      │
-      ▼
-Business Reporting
+CSV Source Files
+        │
+        ▼
+DuckDB Analytics Warehouse
+        │
+        ▼
+dbt Transformation Layer
+        │
+        ▼
+Kimball Dimensional Model
+        │
+        ▼
+Power BI Semantic Model
+        │
+        ▼
+Business Dashboards
 ```
 
 ---
@@ -77,8 +85,9 @@ dbt/
 └── seeds/
 
 docs/
-scripts/
 duckdb/
+powerbi/
+scripts/
 ```
 
 ---
@@ -108,7 +117,7 @@ duckdb/
 
 ### Dimensional Warehouse
 
-Dimensions
+#### Dimensions
 
 - dim_customer
 - dim_date
@@ -116,7 +125,7 @@ Dimensions
 - dim_product
 - dim_seller
 
-Facts
+#### Facts
 
 - fct_order_line
 - fct_payment
@@ -132,6 +141,15 @@ Facts
 - dbt Docs
 - Model lineage
 - 97 automated tests passing
+
+### Power BI Reporting
+
+- Connected Power BI directly to the DuckDB warehouse
+- Configured star schema semantic model
+- Business-friendly table and column names
+- Hidden technical implementation fields
+- Foundational DAX business measures
+- Reporting architecture established
 
 ---
 
@@ -158,28 +176,37 @@ The `/docs` directory contains the project's engineering documentation, includin
 
 One of the biggest takeaways from this project has been learning that Analytics Engineering is as much about architecture and engineering decisions as it is about SQL.
 
-Designing reusable models, choosing the right level for business logic, documenting decisions, and balancing enterprise patterns with project scale have all been valuable learning experiences.
+Designing reusable models, choosing the appropriate layer for business logic, documenting architectural decisions, implementing semantic models, and balancing enterprise patterns with portfolio-scale solutions have all been valuable learning experiences.
 
 ---
 
 # Current Status
 
-🚧 Final Project Polish
+🚧 Dashboard & Reporting (In Progress)
 
-Completed:
+## Completed
 
 - Data ingestion
 - Layered dbt architecture
 - Dimensional warehouse
 - Automated data quality testing
-- Documentation
-- dbt Docs
+- Engineering documentation
+- dbt Docs and lineage
+- Power BI environment
+- Power BI semantic model
+- Foundational DAX measures
 
-Remaining work:
+## In Progress
 
-- Reporting layer
+- Business KPI development
 - Interactive dashboards
+- Executive reporting
+
+## Remaining
+
+- Dashboard refinement
 - Final documentation polish
+- Portfolio completion
 
 ---
 
@@ -195,6 +222,6 @@ Remaining work:
 
 # Author
 
-Petya Dimitrova
+**Petya Dimitrova**
 
 Analytics Engineering Portfolio Project
