@@ -15,6 +15,39 @@ table Orders
 	measure 'Total Revenue' = SUM(Orders[Item Price])
 		lineageTag: 20e223da-ca6e-4e6e-95f0-f74dd492f3ae
 
+	measure 'Repeat Customers' =
+			
+			VAR CustomerOrderCounts =
+			    ADDCOLUMNS(
+			        SUMMARIZE(
+			            Orders,
+			            Customers[customer_unique_id]
+			        ),
+			        "Order Count",
+			        DISTINCTCOUNT(Orders[order_id])
+			    )
+			
+			VAR RepeatCustomers =
+			    FILTER(
+			        CustomerOrderCounts,
+			        [Order Count] > 1
+			    )
+			
+			RETURN
+			    COUNTROWS(RepeatCustomers)
+		formatString: 0
+		lineageTag: 6b57cea0-10bd-4f5b-b286-277aacc25058
+
+	measure 'Repeat Customer Rate' =
+			
+			DIVIDE(
+			    [Repeat Customers],
+			    [Active Customers]
+			)
+		lineageTag: d29b5f7b-2ab2-4702-bf43-ae55eab9d5e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column customer_sk
 		dataType: string
 		isHidden

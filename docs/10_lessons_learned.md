@@ -508,3 +508,25 @@ This is an environment-specific configuration that may not be obvious from the i
 
 
 Automatic relationship detection should never be blindly trusted in a dimensional model.
+
+## Reporting Phase
+
+### DAX is a Transformation Language
+
+One of the biggest conceptual shifts was understanding that DAX is not a collection of independent functions. Instead, measures are built as a sequence of transformations, where each function transforms a table or value into the next step of the business calculation.
+
+This perspective made complex measures easier to reason about by focusing on the intermediate result rather than individual functions.
+
+### Business Grain Before DAX
+
+Several calculations depended on selecting the correct business identifier before writing any DAX.
+
+For example, Repeat Customer Rate must be calculated using `customer_unique_id` rather than the technical surrogate key `customer_sk`.
+
+The business grain should always be validated before implementation.
+
+### SQL as the Bridge to DAX
+
+Translating the business problem into SQL first significantly simplified the DAX implementation.
+
+Rather than learning DAX syntax directly, implementing the SQL logic step by step made the DAX expressions easier to understand and validate.
