@@ -180,36 +180,6 @@ Designing reusable models, choosing the appropriate layer for business logic, do
 
 ---
 
-# Current Status
-
-🚧 Dashboard & Reporting (In Progress)
-
-## Completed
-
-- Data ingestion
-- Layered dbt architecture
-- Dimensional warehouse
-- Automated data quality testing
-- Engineering documentation
-- dbt Docs and lineage
-- Power BI environment
-- Power BI semantic model
-- Foundational DAX measures
-
-## In Progress
-
-- Business KPI development
-- Interactive dashboards
-- Executive reporting
-
-## Remaining
-
-- Dashboard refinement
-- Final documentation polish
-- Portfolio completion
-
----
-
 # Future Improvements
 
 - Semantic metrics layer
