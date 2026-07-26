@@ -20,19 +20,19 @@ table Products
 
 		annotation SummarizationSetBy = Automatic
 
-	column product_category_name
+	column 'Product Category Portuguese'
 		dataType: string
 		lineageTag: db1f9144-6e75-46d4-acb9-51a2f866723f
 		summarizeBy: none
-		sourceColumn: product_category_name
+		sourceColumn: Product Category Portuguese
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Product Category'
+	column 'Product Category English'
 		dataType: string
 		lineageTag: 19786afe-1cd1-4d69-8645-18c8e6b67259
 		summarizeBy: none
-		sourceColumn: Product Category
+		sourceColumn: Product Category English
 
 		annotation SummarizationSetBy = Automatic
 
@@ -99,13 +99,24 @@ table Products
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Product Category Business' =
+			
+			COALESCE(
+			    Products[Product Category English],
+			    Products[Product Category Portuguese]
+			)
+		lineageTag: 451b93ce-e65f-4dbb-8493-8350216bb911
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Products = m
 		mode: import
 		source =
 				let
 				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
 				  #"Navigation 1" = Source{[Item = "dim_product", Schema = "main", Catalog = "olist"]}[Data],
-				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"product_category_name", "product_category_name"}, {"product_category_name_english", "Product Category"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"product_category_name", "Product Category Portuguese"}, {"product_category_name_english", "Product Category English"}})
 				in
 				  #"Renamed Columns"
 

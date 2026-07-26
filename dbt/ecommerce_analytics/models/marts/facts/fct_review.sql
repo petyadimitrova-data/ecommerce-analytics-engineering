@@ -14,7 +14,9 @@ select
     r.review_comment_message,
 
     
-    r.review_score
+    r.review_score,
+
+    io.order_status
 
 from {{ ref('int_order_reviews') }} r
 

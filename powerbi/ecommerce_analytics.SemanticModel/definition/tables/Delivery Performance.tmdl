@@ -1,6 +1,49 @@
 table 'Delivery Performance'
 	lineageTag: 6a9e6e5b-2ad3-4807-a95a-e9c1eb659b7a
 
+	measure 'Average Approval Time' =
+			
+			AVERAGE('Delivery Performance'[Approval Days])
+		lineageTag: c508c338-4e55-4132-b435-4d79dac6ffc6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Delivery Time' =
+			
+			AVERAGE('Delivery Performance'[Delivery Days])
+		lineageTag: ad5ae369-64f8-4ca1-92e5-8ef971a7fac5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'On-Time Deliveries' =
+			
+			CALCULATE(
+			    COUNTROWS('Delivery Performance'),
+			    'Delivery Performance'[Delivered On TIme] = 1
+			)
+		formatString: 0
+		lineageTag: f2385d76-d390-4cee-9fc1-0163986b6487
+
+	measure 'On-Time Delivery Rate' =
+			
+			DIVIDE(
+			    [On-Time Deliveries],
+			    [Total Orders]
+			)
+		lineageTag: 6185a0de-4edc-4de7-b04e-994b2ae6e877
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Delivery Delay' =
+			
+			CALCULATE(
+			    AVERAGE('Delivery Performance'[Delivery Days]),
+			    'Delivery Performance'[Delivered On Time] = 0
+			)
+		lineageTag: fb894e82-da90-412a-a01c-1c55bd54a2a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column customer_sk
 		dataType: string
 		lineageTag: 8dec7e33-5fcb-4ff0-a106-3acbff400565

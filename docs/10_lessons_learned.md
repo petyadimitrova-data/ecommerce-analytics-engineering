@@ -530,3 +530,29 @@ The business grain should always be validated before implementation.
 Translating the business problem into SQL first significantly simplified the DAX implementation.
 
 Rather than learning DAX syntax directly, implementing the SQL logic step by step made the DAX expressions easier to understand and validate.
+
+
+### Reporting Can Reveal Data Model Gaps
+
+Developing business reports validated not only DAX measures but also the completeness of the dimensional model.
+
+While implementing Customer Satisfaction metrics, it became apparent that `fct_review` lacked the `order_status` attribute required to accurately calculate metrics for completed orders.
+
+Rather than compensating in the semantic model with fact-to-fact joins, the warehouse was enhanced by exposing `order_status` in `fct_review`, allowing the reporting layer to remain simple and aligned with dimensional modeling best practices.
+
+## Business Metrics vs DAX Measures
+
+One of the biggest realizations during the Reporting phase was that business metrics and DAX measures are not the same thing.
+
+A business metric answers a business question.
+
+A DAX measure represents a reusable business calculation.
+
+Multiple business metrics can reuse the same DAX measure by changing the filter context or the visualization.
+
+Examples:
+
+- Total Revenue → dedicated DAX measure
+- Revenue by Product Category → Total Revenue grouped by Product Category
+- Revenue by Seller → Total Revenue grouped by Seller
+- Customer Lifetime Value → Total Revenue grouped by Customer

@@ -1,6 +1,29 @@
 table Reviews
 	lineageTag: 60387a80-55b1-4798-9247-8248f5d65964
 
+	measure 'Average Review Score' =
+			
+			CALCULATE(
+			    AVERAGE('Reviews'[Review Score]),
+			    'Reviews'[Order Status] = "delivered"
+			)
+		lineageTag: 44e24199-071b-4e9b-bfd5-bb445db73127
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Positive Review Score' =
+			
+			CALCULATE(
+			    COUNTROWS('Reviews'),
+			    'Reviews'[Review Score]>=4
+			)
+		formatString: 0
+		lineageTag: e68c2a57-e602-4f8f-9ef8-cd808283de40
+
+	measure 'Positive Review Rate' = DIVIDE([Positive Review Score],count('Reviews'[order_id]))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: dab8f326-4f47-43af-8867-97b104ee50c5
+
 	column customer_sk
 		dataType: string
 		isHidden
@@ -65,15 +88,21 @@ table Reviews
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Order Status'
+		dataType: string
+		lineageTag: 3aa4a304-2831-4377-891e-5671b0d2918e
+		summarizeBy: none
+		sourceColumn: Order Status
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Reviews = m
 		mode: import
 		source =
 				let
 				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
 				  #"Navigation 1" = Source{[Item = "fct_review", Schema = "main", Catalog = "olist"]}[Data],
-				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"review_score", "Review Score"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"review_score", "Review Score"}, {"order_status", "Order Status"}})
 				in
 				  #"Renamed Columns"
-
-	changedProperty = Name
 

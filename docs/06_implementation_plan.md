@@ -115,3 +115,16 @@ The business outcome.
 ```
 
 The reporting phase is intentionally separated from the Analytics Engineering implementation to emphasize the distinction between building a trusted analytical data model and delivering business insights through dashboards and visualizations.
+
+### Metric Implementation
+
+Not every business metric requires a dedicated DAX measure.
+
+Many business metrics are different analytical perspectives of the same reusable business calculation.
+
+Examples:
+
+- Total Revenue → dedicated DAX measure
+- Revenue by Product Category → Total Revenue + Product Category dimension
+- Revenue by Seller → Total Revenue + Seller dimension
+- Customer Lifetime Value → Total Revenue + Customer dimension
