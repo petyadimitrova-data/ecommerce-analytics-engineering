@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "10e14da0ed908a0bbee0",
+  "displayName": " Customer Satisfaction ",
+  "displayOption": "FitToWidth",
+  "height": 1800,
+  "width": 1280
+}

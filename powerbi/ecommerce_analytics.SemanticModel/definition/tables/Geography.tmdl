@@ -9,11 +9,11 @@ table Geography
 
 		annotation SummarizationSetBy = Automatic
 
-	column state
+	column State
 		dataType: string
 		lineageTag: 3ea7df8f-dcc9-4504-81aa-6113e046efe8
 		summarizeBy: none
-		sourceColumn: state
+		sourceColumn: State
 
 		annotation SummarizationSetBy = Automatic
 
@@ -36,7 +36,7 @@ table Geography
 	column latitude
 		dataType: double
 		lineageTag: a37bff81-b15b-42e6-b04b-c51e0201ef73
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: latitude
 
 		annotation SummarizationSetBy = Automatic
@@ -46,7 +46,7 @@ table Geography
 	column longitude
 		dataType: double
 		lineageTag: 123bebdc-671b-41cf-b4d7-ee3a5ff78ca0
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: longitude
 
 		annotation SummarizationSetBy = Automatic
@@ -58,9 +58,10 @@ table Geography
 		source =
 				let
 				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
-				  #"Navigation 1" = Source{[Item = "dim_geography", Schema = "main", Catalog = "olist"]}[Data]
+				  #"Navigation 1" = Source{[Item = "dim_geography", Schema = "main", Catalog = "olist"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"state", "State"}})
 				in
-				  #"Navigation 1"
+				  #"Renamed Columns"
 
 	changedProperty = Name
 

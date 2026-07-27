@@ -20,6 +20,12 @@ select
 
     dayofweek(calendar_date) as day_of_week,
 
+    cast(strftime(calendar_date, '%Y%m') as integer) as year_month_key,
+
+    strftime(calendar_date, '%Y-%m') as year_month,
+
+    strftime(calendar_date, '%b %Y') as month_year,
+
     case
         when dayofweek(calendar_date) in (0, 6)
             then true

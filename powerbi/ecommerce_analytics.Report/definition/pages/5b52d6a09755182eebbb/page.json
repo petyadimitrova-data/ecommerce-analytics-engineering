@@ -1,10 +1,49 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "5b52d6a09755182eebbb",
-  "displayName": "Page 1",
-  "displayOption": "FitToPage",
-  "height": 720,
+  "displayName": "Executive Overview",
+  "displayOption": "FitToWidth",
+  "height": 2000,
   "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ae835e6951d6862000c7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Delivery Performance"
+              }
+            },
+            "Property": "On-Time Delivery Rate"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "6d8494e302a3dc2025d9",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "8262099fcc703508ec09",
+        "boundFilter": "ae835e6951d6862000c7",
+        "fieldExpr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Delivery Performance"
+              }
+            },
+            "Property": "On-Time Delivery Rate"
+          }
+        }
+      }
+    ]
+  },
   "objects": {
     "outspacePane": [
       {

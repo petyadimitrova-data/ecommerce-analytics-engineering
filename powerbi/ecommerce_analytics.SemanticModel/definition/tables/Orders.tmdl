@@ -2,14 +2,16 @@ table Orders
 	lineageTag: 6b54413f-73b5-46a5-83fb-5f47d5c2e91e
 
 	measure 'Active Customers' = DISTINCTCOUNT(Orders[customer_sk])
-		formatString: 0
+		formatString: 0.0
 		lineageTag: 22d9e10c-f0fa-4971-9ecc-9c0bc4991176
 
 	measure 'Average Order Value' = DIVIDE([Total Revenue], [Total Orders])
 		lineageTag: beb75480-b766-4887-a6b8-20452e08f1b2
 
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	measure 'Total Orders' = DISTINCTCOUNT(Orders[order_id])
-		formatString: 0
+		formatString: 0.0
 		lineageTag: 406faaf5-6424-44f7-9a29-2acdb7743e83
 
 	measure 'Total Revenue' = SUM(Orders[Item Price])
@@ -44,9 +46,8 @@ table Orders
 			    [Repeat Customers],
 			    [Active Customers]
 			)
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: d29b5f7b-2ab2-4702-bf43-ae55eab9d5e0
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column customer_sk
 		dataType: string

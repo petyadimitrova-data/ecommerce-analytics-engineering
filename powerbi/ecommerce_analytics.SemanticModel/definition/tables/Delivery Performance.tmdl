@@ -30,9 +30,8 @@ table 'Delivery Performance'
 			    [On-Time Deliveries],
 			    [Total Orders]
 			)
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 6185a0de-4edc-4de7-b04e-994b2ae6e877
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Average Delivery Delay' =
 			

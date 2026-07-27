@@ -72,6 +72,14 @@ table Customers
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column geography_sk
+		dataType: string
+		lineageTag: fefa8d31-b697-4140-aa20-254196804b75
+		summarizeBy: none
+		sourceColumn: geography_sk
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Customers = m
 		mode: import
 		source =
@@ -80,6 +88,4 @@ table Customers
 				  #"Navigation 1" = Source{[Item = "dim_customer", Schema = "main", Catalog = "olist"]}[Data]
 				in
 				  #"Navigation 1"
-
-	changedProperty = Name
 

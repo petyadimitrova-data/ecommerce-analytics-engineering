@@ -105,14 +105,41 @@ table Calendar
 
 		annotation SummarizationSetBy = Automatic
 
+	column year_month_key
+		dataType: int64
+		formatString: 0
+		lineageTag: fb41335a-8326-4514-813c-6896c63e85a9
+		summarizeBy: sum
+		sourceColumn: year_month_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		lineageTag: 99ccb5f8-9c16-4f29-a12f-ca807167252b
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: d407854f-bdb4-4121-801f-4b47d805e70e
+		summarizeBy: none
+		sourceColumn: Month Year
+		sortByColumn: year_month_key
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Calendar = m
 		mode: import
 		source =
 				let
 				  Source = DuckDB.Contents("C:\Users\Petya\Documents\Analytics Engineering\ecommerce-analytics-engineering\duckdb\olist.duckdb", "localhost", true, null, null, []),
-				  #"Navigation 1" = Source{[Item = "dim_date", Schema = "main", Catalog = "olist"]}[Data]
+				  #"Navigation 1" = Source{[Item = "dim_date", Schema = "main", Catalog = "olist"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(#"Navigation 1",{{"month_year", "Month Year"}})
 				in
-				  #"Navigation 1"
-
-	changedProperty = Name
+				  #"Renamed Columns"
 

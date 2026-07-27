@@ -44,3 +44,7 @@ relationship 24e0b275-0343-6de3-da5d-6362f91b57eb
 	fromColumn: Payments.customer_sk
 	toColumn: Customers.customer_sk
 
+relationship AutoDetected_c68bfec3-2851-4031-9f0c-4281504ee203
+	fromColumn: Customers.geography_sk
+	toColumn: Geography.geography_sk
+
