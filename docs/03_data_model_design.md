@@ -28,7 +28,7 @@ Primary Key:
 
 Business Key:
 
-* customer_unique_id (to validate it)
+* customer_unique_id
 
 Relationships:
 
@@ -167,7 +167,7 @@ Candidate Attributes
 
 One row per calendar date.
 
-# Candidate Fact Tables
+# Fact Tables
 
 ## fct_order_line
 
@@ -231,11 +231,6 @@ Dimensions:
 Purpose:
 Supports payment analysis, payment method analysis, and payment value reporting.
 
-Open Questions:
-
-* Validate relationship between orders and payments.
-* Confirm whether multiple payment transactions can exist for a single order.
-
 ---
 
 ## fct_delivery_performance
@@ -266,11 +261,6 @@ Dimensions:
 Purpose:
 Supports logistics and fulfillment analysis, including delivery performance and on-time delivery metrics.
 
-Open Questions:
-
-* Validate calculation logic for approval, shipping, and delivery durations.
-* Determine whether additional seller-level delivery analysis is required.
-
 ---
 
 ## fct_review
@@ -298,11 +288,6 @@ Dimensions:
 
 Purpose:
 Supports customer satisfaction analysis, review trends, seller ratings, and product ratings.
-
-Open Questions:
-
-* Validate review-to-order relationship.
-* Confirm whether multiple reviews can exist for a single order.
 
 ---
 
