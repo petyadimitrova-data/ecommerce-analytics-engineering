@@ -170,8 +170,6 @@ The semantic model exposes reusable business measures while hiding technical imp
 
 # Dashboard Preview
 
-> *(Insert dashboard screenshots here)*
-
 ## Executive Overview
 
 ![Executive Overview](images/executive_overview.png)
